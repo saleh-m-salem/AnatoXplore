@@ -1,0 +1,1292 @@
+<%@ Master Language="C#" AutoEventWireup="true" 
+
+    CodeBehind="Site.Master.cs" 
+
+    Inherits="AnatoXplore.SiteMaster" %> 
+
+ 
+
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head runat="server"> 
+
+    <link rel="icon" type="image/png" href="<%= ResolveUrl("~/Images/logo.png") %>" />
+
+    <meta charset="utf-8" /> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+
+ 
+
+    <title> 
+
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server"> 
+
+            AnatoXplore 
+
+        </asp:ContentPlaceHolder> 
+
+    </title> 
+
+ 
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+
+    <link rel="stylesheet" href="<%= ResolveUrl("~/Content/assistant-chat.css") %>" /> 
+
+ 
+
+    <style> 
+
+        * { 
+
+            box-sizing: border-box; 
+
+        } 
+
+ 
+
+        html, body { 
+
+            width: 100%; 
+
+            min-height: 100%; 
+
+            margin: 0; 
+
+        } 
+
+ 
+
+        html { 
+
+            min-height: 100vh; 
+
+        } 
+
+ 
+
+        body { 
+
+            min-height: 100vh; 
+
+            display: flex; 
+
+            flex-direction: column; 
+
+            font-family: "Segoe UI", Arial, sans-serif; 
+
+            color: #183153; 
+
+            background: #ffffff;
+
+        } 
+
+ 
+
+        form#form1 { 
+
+            width: 100%; 
+
+            flex: 1 0 auto; 
+
+            min-height: 100vh; 
+
+            display: flex; 
+
+            flex-direction: column; 
+
+        } 
+
+ 
+
+        /* HEADER */ 
+
+        .site-header { 
+
+            width: 100%; 
+
+            min-height: 66px; 
+
+            padding: 0 4%; 
+
+            background: linear-gradient(110deg, #071f3d, #0b3558); 
+
+            color: white; 
+
+            display: flex; 
+
+            align-items: center; 
+
+            justify-content: space-between; 
+
+            gap: 25px; 
+
+            flex-wrap: wrap; 
+
+            border-bottom: 1px solid #244a70; 
+
+        } 
+
+ 
+
+        .site-brand { 
+
+            display: flex; 
+
+            align-items: center; 
+
+            gap: 10px; 
+
+            flex-shrink: 0; 
+
+            text-decoration: none; 
+
+            color: white; 
+
+        } 
+
+ 
+
+        .site-logo { 
+
+            width: 65px; 
+
+            height: 65px; 
+
+            object-fit: contain; 
+
+        } 
+
+ 
+
+        .site-brand-name { 
+
+            font-size: 25px; 
+
+            font-weight: 750; 
+
+            white-space: nowrap; 
+
+        } 
+
+ 
+
+        .site-nav { 
+
+            display: flex; 
+
+            align-items: center; 
+
+            justify-content: center; 
+
+            gap: 27px; 
+
+            flex: 1; 
+
+        } 
+
+ 
+
+        .site-nav a { 
+
+            padding: 22px 0 18px; 
+
+            border-bottom: 3px solid transparent; 
+
+            color: #e4edf7; 
+
+            font-size: 14px; 
+
+            text-decoration: none; 
+
+            white-space: nowrap; 
+
+            transition: 0.2s; 
+
+        } 
+
+ 
+
+        .site-nav a:hover { 
+
+            color: white; 
+
+            border-bottom-color: #8acbff; 
+
+        } 
+
+ 
+
+        /* ACCOUNT LINKS */ 
+
+        .site-account { 
+
+            display: flex; 
+
+            align-items: center; 
+
+            justify-content: flex-end; 
+
+            gap: 12px; 
+
+            flex-shrink: 0; 
+
+        } 
+
+ 
+
+        .site-account a { 
+
+            display: inline-block; 
+
+            min-width: 95px; 
+
+            padding: 10px 18px; 
+
+            border-radius: 8px; 
+
+            text-align: center; 
+
+            font-size: 14px; 
+
+            font-weight: 600; 
+
+            text-decoration: none; 
+
+            transition: 0.2s; 
+
+        } 
+
+ 
+
+        .site-login { 
+
+            color: white; 
+
+            border: 1px solid #91b4d3; 
+
+            background: rgba(255, 255, 255, 0.08); 
+
+        } 
+
+ 
+
+        .site-login:hover { 
+
+            background: rgba(255, 255, 255, 0.17); 
+
+        } 
+
+ 
+
+        .site-register { 
+
+            color: #12345a; 
+
+            background: white; 
+
+            border: 1px solid white; 
+
+        } 
+
+ 
+
+        .site-register:hover { 
+
+            background: #e6f3ff; 
+
+        } 
+
+ 
+
+        /* PROFILE LINK */ 
+
+        .site-account a.site-profile { 
+
+            display: flex; 
+
+            flex-direction: row; 
+
+            align-items: center; 
+
+            justify-content: flex-start; 
+
+            gap: 10px; 
+
+ 
+
+            min-width: 0; 
+
+            padding: 6px 10px; 
+
+ 
+
+            border: 1px solid transparent; 
+
+            border-radius: 10px; 
+
+            background: transparent; 
+
+ 
+
+            text-align: left; 
+
+            text-decoration: none; 
+
+            white-space: nowrap; 
+
+        } 
+
+ 
+
+        .site-account a.site-profile:hover { 
+
+            background: rgba(255, 255, 255, 0.10); 
+
+            border-color: rgba(138, 203, 255, 0.25); 
+
+        } 
+
+ 
+
+        /* PROFILE AVATAR */ 
+
+        .site-avatar { 
+
+            width: 44px; 
+
+            height: 44px; 
+
+            flex: 0 0 44px; 
+
+ 
+
+            display: flex; 
+
+            align-items: center; 
+
+            justify-content: center; 
+
+ 
+
+            overflow: hidden; 
+
+            border: 2px solid #8acbff; 
+
+            border-radius: 50%; 
+
+ 
+
+            background: linear-gradient(135deg, #168fe5, #0b3558); 
+
+            color: #ffffff; 
+
+ 
+
+            font-size: 18px; 
+
+            font-weight: 750; 
+
+            line-height: 1; 
+
+            text-transform: uppercase; 
+
+        } 
+
+ 
+
+        .site-avatar img, .lb-avatar img, .lb-table-avatar img, .disc-avatar img, .dd-avatar img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            object-fit: cover;
+        }
+
+        .site-avatar.profile-frame-teal-frost, .lb-avatar.profile-frame-teal-frost,
+        .lb-table-avatar.profile-frame-teal-frost, .disc-avatar.profile-frame-teal-frost,
+        .dd-avatar.profile-frame-teal-frost { border-color: #54e0d0 !important; box-shadow: 0 0 0 2px #e1faf7; }
+        .site-avatar.profile-frame-silver-frost, .lb-avatar.profile-frame-silver-frost,
+        .lb-table-avatar.profile-frame-silver-frost, .disc-avatar.profile-frame-silver-frost,
+        .dd-avatar.profile-frame-silver-frost { border-color: #c7d0da !important; box-shadow: 0 0 0 2px #edf1f5; }
+        .site-avatar.profile-frame-royal-blue, .lb-avatar.profile-frame-royal-blue,
+        .lb-table-avatar.profile-frame-royal-blue, .disc-avatar.profile-frame-royal-blue,
+        .dd-avatar.profile-frame-royal-blue { border-color: #6554ed !important; box-shadow: 0 0 0 2px #e8e7ff; }
+        .site-avatar.profile-frame-rose-pink, .lb-avatar.profile-frame-rose-pink,
+        .lb-table-avatar.profile-frame-rose-pink, .disc-avatar.profile-frame-rose-pink,
+        .dd-avatar.profile-frame-rose-pink { border-color: #ff84b4 !important; box-shadow: 0 0 0 2px #ffebf2; }
+        .site-avatar.profile-frame-master-gold, .lb-avatar.profile-frame-master-gold,
+        .lb-table-avatar.profile-frame-master-gold, .disc-avatar.profile-frame-master-gold,
+        .dd-avatar.profile-frame-master-gold { border-color: #e2b632 !important; box-shadow: 0 0 0 2px #fff4cb; }
+        .site-avatar.profile-frame-default-blue, .lb-avatar.profile-frame-default-blue,
+        .lb-table-avatar.profile-frame-default-blue, .disc-avatar.profile-frame-default-blue,
+        .dd-avatar.profile-frame-default-blue { border-color: #8acbff !important; }
+
+        /* USER NAME */ 
+
+        .site-welcome { 
+
+            display: inline-flex; 
+
+            flex-direction: row; 
+
+            align-items: center; 
+
+            justify-content: flex-start; 
+
+ 
+
+            height: 44px; 
+
+            min-width: 0; 
+
+            margin: 0; 
+
+            padding: 0; 
+
+ 
+
+            color: #ffffff; 
+
+            font-size: 15px; 
+
+            font-weight: 650; 
+
+            line-height: 1.2; 
+
+            white-space: nowrap; 
+
+            text-decoration: none; 
+
+        } 
+
+ 
+
+        /* MAIN CONTENT */ 
+
+        .page-container { 
+
+            width: 100%; 
+
+            flex: 1 0 auto; 
+
+            min-height: calc(100vh - 66px); 
+
+            display: flex; 
+
+            flex-direction: column; 
+
+            align-items: stretch; 
+
+        } 
+
+ 
+
+        .page-container > * { 
+
+            min-width: 0; 
+
+        } 
+
+ 
+
+        .anato-home { 
+
+            width: 100%; 
+
+            max-width: 1440px; 
+
+            margin: 0 auto; 
+
+            padding: 0 28px; 
+
+        } 
+
+ 
+
+        .anato-hero { 
+
+            width: 100%; 
+
+            margin: 28px auto 45px; 
+
+            border-radius: 26px; 
+
+            overflow: hidden; 
+
+        } 
+
+ 
+
+        .anato-section, 
+
+        .anato-ready { 
+
+            width: 100%; 
+
+            margin-left: auto; 
+
+            margin-right: auto; 
+
+        } 
+
+ 
+
+        /* FOOTER */ 
+
+        .site-footer { 
+
+            width: 100%; 
+
+            margin-top: 0; 
+
+            padding: 28px max(5%, calc((100% - 1320px) / 2)) 0; 
+
+            background: linear-gradient(110deg, #071f3d, #0b2d4a); 
+
+            color: #d6e4f2; 
+
+            border-top: 3px solid #1769aa; 
+
+        } 
+
+ 
+
+        .footer-grid { 
+
+            display: grid; 
+
+            grid-template-columns: 1.3fr 1fr 1fr; 
+
+            gap: 40px; 
+
+            padding-bottom: 25px; 
+
+        } 
+
+ 
+
+        .footer-brand { 
+
+            display: flex; 
+
+            align-items: center; 
+
+            gap: 9px; 
+
+            margin-bottom: 10px; 
+
+        } 
+
+ 
+
+        .footer-logo { 
+
+            width: 35px; 
+
+            height: 35px; 
+
+            object-fit: contain; 
+
+        } 
+
+ 
+
+        .footer-brand-name { 
+
+            color: white; 
+
+            font-size: 17px; 
+
+            font-weight: 700; 
+
+        } 
+
+ 
+
+        .footer-description { 
+
+            max-width: 260px; 
+
+            margin: 0; 
+
+            color: #c0d1e2; 
+
+            font-size: 12px; 
+
+            line-height: 1.7; 
+
+        } 
+
+ 
+
+        .footer-column h3 { 
+
+            margin: 3px 0 12px; 
+
+            color: white; 
+
+            font-size: 13px; 
+
+            font-weight: 700; 
+
+        } 
+
+ 
+
+        .footer-column a { 
+
+            display: block; 
+
+            margin: 8px 0; 
+
+            color: #c0d1e2; 
+
+            font-size: 12px; 
+
+            text-decoration: none; 
+
+            transition: color 0.2s; 
+
+        } 
+
+ 
+
+        .footer-column a:hover { 
+
+            color: #8acbff; 
+
+            text-decoration: underline; 
+
+        } 
+
+ 
+
+        .footer-bottom { 
+
+            border-top: 1px solid #29445f; 
+
+            padding: 14px 0; 
+
+            color: #b9cce0; 
+
+            font-size: 11px; 
+
+        } 
+
+ 
+
+        .footer-bottom p { 
+
+            margin: 0; 
+
+        } 
+
+ 
+
+        /* RESPONSIVE */ 
+
+        @media (max-width: 900px) { 
+
+            .site-header { 
+
+                padding: 14px 4%; 
+
+                gap: 15px; 
+
+            } 
+
+ 
+
+            .site-nav { 
+
+                gap: 18px; 
+
+            } 
+
+ 
+
+            .site-nav a { 
+
+                padding: 8px 0; 
+
+            } 
+
+ 
+
+            .anato-home { 
+
+                padding: 0 20px; 
+
+            } 
+
+ 
+
+            .footer-grid { 
+
+                gap: 25px; 
+
+            } 
+
+        } 
+
+ 
+
+        @media (max-width: 650px) { 
+
+            .site-header { 
+
+                justify-content: space-between; 
+
+            } 
+
+ 
+
+            .site-brand-name { 
+
+                font-size: 18px; 
+
+            } 
+
+ 
+
+            .site-logo { 
+
+                width: 30px; 
+
+                height: 30px; 
+
+            } 
+
+ 
+
+            .site-account { 
+
+                gap: 7px; 
+
+            } 
+
+ 
+
+            .site-account a:not(.site-profile) { 
+
+                min-width: 70px; 
+
+                padding: 9px 11px; 
+
+                font-size: 12px; 
+
+            } 
+
+ 
+
+            .site-account a.site-profile { 
+
+                gap: 8px; 
+
+                padding: 5px 7px; 
+
+            } 
+
+ 
+
+            .site-avatar { 
+
+                width: 36px; 
+
+                height: 36px; 
+
+                flex-basis: 36px; 
+
+                font-size: 15px; 
+
+            } 
+
+ 
+
+            .site-welcome { 
+
+                height: 36px; 
+
+                font-size: 12px; 
+
+            } 
+
+ 
+
+            .site-nav { 
+
+                order: 3; 
+
+                flex-basis: 100%; 
+
+                justify-content: flex-start; 
+
+                flex-wrap: wrap; 
+
+                gap: 20px; 
+
+            } 
+
+ 
+
+            .site-nav a { 
+
+                font-size: 13px; 
+
+            } 
+
+ 
+
+            .anato-home { 
+
+                padding: 0 14px; 
+
+            } 
+
+ 
+
+            .anato-hero { 
+
+                margin-top: 18px; 
+
+                border-radius: 20px; 
+
+            } 
+
+ 
+
+            .footer-grid { 
+
+                grid-template-columns: 1fr 1fr; 
+
+                gap: 24px 18px; 
+
+            } 
+
+ 
+
+            .footer-grid .footer-column:first-child { 
+
+                grid-column: 1 / -1; 
+
+            } 
+
+        } 
+
+ 
+
+        @media (max-width: 400px) { 
+
+            .footer-grid { 
+
+                grid-template-columns: 1fr; 
+
+            } 
+
+ 
+
+            .footer-grid .footer-column:first-child { 
+
+                grid-column: auto; 
+
+            } 
+
+        } 
+
+    </style> 
+
+</head> 
+
+ 
+
+<body> 
+
+    <form id="form1" runat="server">
+        <!-- HEADER --> 
+
+        <header class="site-header"> 
+
+ 
+
+            <a href="<%= ResolveUrl("~/Default.aspx") %>" 
+
+               class="site-brand"> 
+
+ 
+
+                <asp:Image 
+
+                    ID="SiteLogo" 
+
+                    runat="server" 
+
+                    ImageUrl="~/Images/logo.png" 
+
+                    AlternateText="AnatoXplore Logo" 
+
+                    CssClass="site-logo" /> 
+
+ 
+
+                <span class="site-brand-name">AnatoXplore</span> 
+
+            </a> 
+
+ 
+
+            <!-- MAIN NAVIGATION --> 
+
+            <nav class="site-nav" aria-label="Main navigation"> 
+
+ 
+
+                <a href="<%= ResolveUrl("~/Default.aspx") %>"> 
+
+                    Home 
+
+                </a> 
+
+ 
+
+                <a href="<%= ResolveUrl("~/Discussion/Discussions.aspx") %>"> 
+
+                    Discussions 
+
+                </a> 
+
+ 
+
+                <a href="<%= ResolveUrl("~/Leaderboard/Leaderboard.aspx") %>"> 
+
+                    Leaderboard 
+
+                </a> 
+
+ 
+
+                <a href="<%= ResolveUrl("~/About.aspx") %>"> 
+
+                    About 
+
+                </a> 
+
+ 
+
+            </nav> 
+
+ 
+
+            <!-- ACCOUNT --> 
+
+            <div class="site-account"> 
+
+ 
+
+                <asp:PlaceHolder 
+
+                    ID="LoggedOutLinks" 
+
+                    runat="server"> 
+
+ 
+
+                    <a class="site-login" 
+
+                       href="<%= ResolveUrl("~/Login.aspx") %>"> 
+
+                        Login 
+
+                    </a> 
+
+ 
+
+                    <a class="site-register" 
+
+                       href="<%= ResolveUrl("~/Register.aspx") %>"> 
+
+                        Register 
+
+                    </a> 
+
+ 
+
+                </asp:PlaceHolder> 
+
+ 
+
+                <asp:PlaceHolder 
+
+                    ID="LoggedInLinks" 
+
+                    runat="server" 
+
+                    Visible="false"> 
+
+ 
+
+                    <!-- Avatar and full name are one clickable profile link --> 
+
+                    <a href="<%= ResolveUrl("~/Dashboard/Profile.aspx") %>" 
+
+                       class="site-profile" 
+
+                       title="Go to your profile"> 
+
+ 
+
+                        <asp:Literal ID="litUserAvatar" runat="server" /> 
+
+ 
+
+                        <span class="site-welcome"> 
+
+                            Welcome,&nbsp;<asp:Label 
+
+                                ID="lblUserName" 
+
+                                runat="server" /> 
+
+                        </span> 
+
+ 
+
+                    </a> 
+
+ 
+
+                    <asp:HyperLink ID="lnkAdminDashboard" runat="server" CssClass="site-login" NavigateUrl="~/Dashboard/AdminDashboard.aspx" Visible="false">Admin Dashboard</asp:HyperLink>
+
+                    <asp:LinkButton 
+
+                        ID="lnkLogout"
+
+                        runat="server" 
+
+                        CssClass="site-login" 
+
+                        OnClick="lnkLogout_Click" 
+
+                        CausesValidation="false"> 
+
+                        Logout 
+
+                    </asp:LinkButton> 
+
+ 
+
+                </asp:PlaceHolder> 
+
+ 
+
+            </div> 
+
+ 
+
+        </header> 
+
+ 
+
+        <!-- PAGE CONTENT --> 
+
+        <main class="page-container"> 
+
+ 
+
+            <asp:ContentPlaceHolder 
+
+                ID="MainContent" 
+
+                runat="server"> 
+
+            </asp:ContentPlaceHolder> 
+
+ 
+
+        </main> 
+
+ 
+
+        <!-- FOOTER --> 
+
+        <footer class="site-footer"> 
+
+ 
+
+            <div class="footer-grid"> 
+
+ 
+
+                <div class="footer-column"> 
+
+ 
+
+                    <div class="footer-brand"> 
+
+ 
+
+                        <asp:Image 
+
+                            ID="FooterLogo" 
+
+                            runat="server" 
+
+                            ImageUrl="~/Images/logo.png" 
+
+                            AlternateText="AnatoXplore Logo" 
+
+                            CssClass="footer-logo" /> 
+
+ 
+
+                        <span class="footer-brand-name"> 
+
+                            AnatoXplore 
+
+                        </span> 
+
+ 
+
+                    </div> 
+
+ 
+
+                    <p class="footer-description"> 
+
+                        Interactive Anatomy Learning Platform 
+
+                        for Medical Students. 
+
+                    </p> 
+
+ 
+
+                </div> 
+
+ 
+
+                <div class="footer-column"> 
+
+ 
+
+                    <h3>Quick Links</h3> 
+
+ 
+
+                    <a href="<%= ResolveUrl("~/Default.aspx") %>"> 
+
+                        Home 
+
+                    </a> 
+
+ 
+
+                    <a href="<%= ResolveUrl("~/Default.aspx") %>#topics">
+
+                        Explore Topics 
+
+                    </a> 
+
+ 
+
+                    <a href="<%= ResolveUrl("~/Discussion/Discussions.aspx") %>"> 
+
+                        Discussions 
+
+                    </a> 
+
+ 
+
+                    <a href="<%= ResolveUrl("~/About.aspx") %>"> 
+
+                        About 
+
+                    </a> 
+
+ 
+
+                </div> 
+
+ 
+
+                <div class="footer-column"> 
+
+ 
+
+                    <h3>Report &amp; Feedback</h3> 
+
+ 
+
+                    <a href="<%= ResolveUrl("~/Feedback/Feedback.aspx") %>"> 
+
+                        Send Feedback 
+
+                    </a> 
+
+ 
+
+                </div> 
+
+ 
+
+            </div> 
+
+ 
+
+            <div class="footer-bottom"> 
+
+                <p> 
+
+                    &copy; 2026 AnatoXplore. All rights reserved. 
+
+                </p> 
+
+            </div> 
+
+ 
+
+        </footer> 
+
+ 
+
+        <div class="anx-chat" id="anxChat" data-endpoint="<%= ResolveUrl("~/Services/AIChatHandler.ashx") %>">
+            <section class="anx-chat-panel" id="anxChatPanel" aria-label="AnatoXplore AI assistant" hidden>
+                <header class="anx-chat-header">
+                    <div class="anx-chat-brand">
+                        <img class="anx-chat-mark" src="<%= ResolveUrl("~/Images/logo.png") %>" alt="" aria-hidden="true" />
+                        <span><strong>AnatoXplore AI</strong><small>Anatomy and site help</small></span>
+                    </div>
+                    <button class="anx-chat-close" id="anxChatClose" type="button" aria-label="Close chat">&times;</button>
+                </header>
+                <div class="anx-chat-messages" id="anxChatMessages" role="log" aria-live="polite" aria-relevant="additions">
+                    <div class="anx-chat-message anx-chat-assistant">Hi! Ask me an anatomy question or how to use AnatoXplore.</div>
+                </div>
+                <div class="anx-chat-form" id="anxChatForm">
+                    <label class="anx-chat-sr-only" for="anxChatInput">Your message</label>
+                    <textarea id="anxChatInput" rows="2" maxlength="1200" placeholder="Ask a question..."></textarea>
+                    <button class="anx-chat-send" id="anxChatSend" type="button" aria-label="Send message">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20.5 22 12 3 3.5 3.2 10l12.3 2-12.3 2z" /></svg>
+                    </button>
+                </div>
+                <p class="anx-chat-note">Messages go to Google Gemini. Free-tier data may help improve Google products. Do not share personal or health details.</p>
+            </section>
+            <button class="anx-chat-toggle" id="anxChatToggle" type="button" aria-expanded="false" aria-controls="anxChatPanel">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-5 3v-3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm3 5v2h10V9zm0 4v2h7v-2z" /></svg>
+                <span>Ask AI</span>
+            </button>
+        </div>
+        <script src="<%= ResolveUrl("~/Scripts/assistant-chat.js") %>" defer></script>
+    </form> 
+
+</body> 
+
+</html> 
+
+
+
+
+
+
