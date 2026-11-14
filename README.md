@@ -2,7 +2,7 @@
 
 AnatoXplore is an anatomy learning website. Students explore interactive 3D models of the human body, take quizzes to earn XP, compete on a leaderboard, ask questions in a discussion forum, and chat with an AI assistant.
 
-Group project for **CT050-3-2 Web Applications (WAPP)** at Asia Pacific University (APU), 2026.
+University group project, 2026.
 
 **Live Demo:** [anatoxplore.runasp.net](http://anatoxplore.runasp.net/Default.aspx)
 *(Free hosting. The AI chat is not available on the live version.)*
